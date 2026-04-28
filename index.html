@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>Заказ бензовоза</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: #e0e0e0;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+            padding: 16px;
+        }
+        .app-container {
+            width: 100%;
+            max-width: 420px;
+            background-color: #1e1e30;
+            border-radius: 20px;
+            padding: 24px 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            margin-top: 16px;
+            border: 1px solid #2a2a40;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .icon {
+            font-size: 52px;
+            margin-bottom: 6px;
+        }
+        h1 {
+            font-size: 22px;
+            font-weight: 700;
+            color: #fff;
+        }
+        .subtitle {
+            font-size: 13px;
+            color: #888;
+            margin-top: 4px;
+        }
+        .section {
+            background: #252540;
+            border-radius: 14px;
+            padding: 16px;
+            margin-bottom: 14px;
+            border: 1px solid #2e2e48;
+        }
+        .section-title {
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            color: #ff9800;
+            margin-bottom: 14px;
+            font-weight: 600;
+        }
+        .input-group {
+            margin-bottom: 12px;
+        }
+        .input-group:last-child {
+            margin-bottom: 0;
+        }
+        label {
+            display: block;
+            font-size: 12px;
+            color: #aaa;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+        label .required {
+            color: #ff5252;
+        }
+        input, textarea {
+            width: 100%;
+            padding: 13px 14px;
+            background-color: #1a1a2e;
+            border: 1px solid #33335a;
+            border-radius: 10px;
+            color: #fff;
+            font-size: 15px;
+            outline: none;
+            transition: border 0.2s;
+            font-family: inherit;
+            -webkit-appearance: none;
+        }
+        textarea {
+            height: 80px;
+            resize: vertical;
+        }
+        input:focus, textarea:focus {
+            border-color: #ff9800;
+        }
+        input::placeholder, textarea::placeholder {
+            color: #555;
+        }
+        .button {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(135deg, #ff9800, #f57c00);
+            color: #1a1a2e;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .button:active {
+            transform: scale(0.98);
+            opacity: 0.9;
+        }
+        .button:disabled {
+            background: #444;
+            color: #888;
+            cursor: not-allowed;
+            transform: none;
+            opacity: 1;
+        }
+        .success-box {
+            display: none;
+            margin-top: 16px;
+            background: #1a3a1a;
+            border: 1px solid #4caf50;
+            border-radius: 14px;
+            padding: 16px;
+            text-align: center;
+            color: #81c784;
+        }
+        .success-box .big-icon {
+            font-size: 40px;
+        }
+        .note {
+            font-size: 11px;
+            color: #666;
+            text-align: center;
+            margin-top: 12px;
+        }
+        .error-input {
+            border-color: #ff5252 !important;
+        }
+        .telegram-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: #2a7ab5;
+            color: #fff;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            margin-top: 8px;
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <div class="header">
+            <div class="icon">🚛</div>
+            <h1>Заказ бензовоза</h1>
+            <p class="subtitle">доставка топлива по городу и области</p>
+            <div class="telegram-badge">⚡ Уведомления в Telegram</div>
+        </div>
+
+        <!-- Объём и адрес -->
+        <div class="section">
+            <div class="section-title">📦 Детали заказа</div>
+            <div class="input-group">
+                <label>Объём топлива <span class="required">*</span> (литры)</label>
+                <input type="number" id="volumeInput" placeholder="Например: 500" min="100" max="30000" step="100">
+            </div>
+            <div class="input-group">
+                <label>Адрес доставки <span class="required">*</span></label>
+                <textarea id="addressInput" placeholder="Город, улица, дом, ориентиры..."></textarea>
+            </div>
+            <div class="input-group">
+                <label>Комментарий</label>
+                <input type="text" id="commentInput" placeholder="Особенности подачи, время...">
+            </div>
+        </div>
+
+        <!-- Контакты -->
+        <div class="section">
+            <div class="section-title">📞 Ваши контакты</div>
+            <div class="input-group">
+                <label>Имя <span class="required">*</span></label>
+                <input type="text" id="nameInput" placeholder="Ваше имя">
+            </div>
+            <div class="input-group">
+                <label>Телефон <span class="required">*</span></label>
+                <input type="tel" id="phoneInput" placeholder="+7 (900) 123-45-67">
+            </div>
+        </div>
+
+        <!-- Кнопка -->
+        <button class="button" id="submitBtn" onclick="submitOrder()">📩 Отправить заявку</button>
+
+        <!-- Успех -->
+        <div class="success-box" id="successBox">
+            <div class="big-icon">✅</div>
+            <strong>Заявка отправлена!</strong>
+            <p style="margin-top:6px; font-size:13px;">Оператор свяжется с вами в ближайшее время</p>
+        </div>
+
+        <p class="note">⚡ Работаем круглосуточно • Доставка от 30 минут</p>
+    </div>
+
+    <script>
+        // ⚙️ НАСТРОЙКИ TELEGRAM — вставь свои данные сюда
+        const TELEGRAM_BOT_TOKEN = 'ВСТАВЬ_СВОЙ_ТОКЕН_СЮДА';
+        const TELEGRAM_CHAT_ID = 'ВСТАВЬ_СВОЙ_CHAT_ID_СЮДА';
+
+        function validateForm() {
+            let valid = true;
+            const fields = [
+                { id: 'volumeInput', name: 'объём' },
+                { id: 'addressInput', name: 'адрес' },
+                { id: 'nameInput', name: 'имя' },
+                { id: 'phoneInput', name: 'телефон' }
+            ];
+
+            fields.forEach(f => {
+                document.getElementById(f.id).classList.remove('error-input');
+            });
+
+            fields.forEach(f => {
+                const el = document.getElementById(f.id);
+                if (!el.value.trim()) {
+                    el.classList.add('error-input');
+                    valid = false;
+                }
+            });
+
+            const vol = parseInt(document.getElementById('volumeInput').value);
+            if (isNaN(vol) || vol < 100 || vol > 30000) {
+                document.getElementById('volumeInput').classList.add('error-input');
+                valid = false;
+            }
+
+            const phone = document.getElementById('phoneInput').value.replace(/\D/g, '');
+            if (phone.length < 10) {
+                document.getElementById('phoneInput').classList.add('error-input');
+                valid = false;
+            }
+
+            return valid;
+        }
+
+        async function sendToTelegram(text) {
+            const url = `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}=8725933179:AAGUNR9Q6YLPytIqFynhHyensQUvGj-f5sg`;
+            
+            const response = await fetch(url, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    chat_id: TELEGRAM_CHAT_ID='6483953073';
+                    text: text,
+                    parse_mode: 'HTML'
+                })
+            });
+
+            if (!response.ok) {
+                const err = await response.json();
+                throw new Error(err.description || 'Ошибка Telegram');
+            }
+
+            return response.json();
+        }
+
+        async function submitOrder() {
+            const btn = document.getElementById('submitBtn');
+            const successBox = document.getElementById('successBox');
+
+            if (!validateForm()) {
+                btn.style.transform = 'translateX(-4px)';
+                setTimeout(() => { btn.style.transform = 'translateX(4px)'; }, 50);
+                setTimeout(() => { btn.style.transform = 'translateX(0)'; }, 100);
+                return;
+            }
+
+            const volume = document.getElementById('volumeInput').value;
+            const address = document.getElementById('addressInput').value;
+            const comment = document.getElementById('commentInput').value || '—';
+            const name = document.getElementById('nameInput').value;
+            const phone = document.getElementById('phoneInput').value;
+            const timestamp = new Date().toLocaleString('ru-RU');
+
+            // Формируем красивое сообщение
+            const message = `
+🚛 <b>НОВАЯ ЗАЯВКА — БЕНЗОВОЗ</b>
+
+📦 <b>Объём:</b> ${volume} литров
+📍 <b>Адрес:</b> ${address}
+📝 <b>Комментарий:</b> ${comment}
+
+👤 <b>Заказчик:</b> ${name}
+📞 <b>Телефон:</b> ${phone}
+
+🕐 <b>Время заявки:</b> ${timestamp}
+            `.trim();
+
+            btn.disabled = true;
+            btn.textContent = '⏳ Отправка...';
+            successBox.style.display = 'none';
+
+            try {
+                await sendToTelegram(message);
+                
+                btn.style.display = 'none';
+                successBox.style.display = 'block';
+                successBox.scrollIntoView({ behavior: 'smooth' });
+            } catch (error) {
+                alert('❌ Не удалось отправить заявку.\n\nПозвоните нам: +7 (900) 123-45-67');
+                console.error('Ошибка:', error);
+            } finally {
+                btn.disabled = false;
+                btn.textContent = '📩 Отправить заявку';
+            }
+        }
+
+        // Маска телефона
+        document.getElementById('phoneInput').addEventListener('input', function(e) {
+            let val = e.target.value.replace(/\D/g, '');
+            if (val.length > 11) val = val.slice(0, 11);
+            let formatted = '+7 (';
+            if (val.length > 1) formatted += val.slice(1, 4);
+            if (val.length > 4) formatted += ') ' + val.slice(4, 7);
+            if (val.length > 7) formatted += '-' + val.slice(7, 9);
+            if (val.length > 9) formatted += '-' + val.slice(9, 11);
+            e.target.value = formatted;
+        });
+    </script>
+</body>
+</html>
