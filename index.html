@@ -150,17 +150,6 @@
         .error-input {
             border-color: #ff5252 !important;
         }
-        .telegram-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            background: #2a7ab5;
-            color: #fff;
-            padding: 6px 12px;
-            border-radius: 20px;
-            font-size: 12px;
-            margin-top: 8px;
-        }
     </style>
 </head>
 <body>
@@ -169,10 +158,9 @@
             <div class="icon">🚛</div>
             <h1>Заказ бензовоза</h1>
             <p class="subtitle">доставка топлива по городу и области</p>
-            <div class="telegram-badge">⚡ Уведомления в Telegram</div>
         </div>
 
-        <!-- Объём и адрес -->
+        <!-- Объём, откуда, куда -->
         <div class="section">
             <div class="section-title">📦 Детали заказа</div>
             <div class="input-group">
@@ -180,7 +168,11 @@
                 <input type="number" id="volumeInput" placeholder="Например: 50000" min="1" step="100">
             </div>
             <div class="input-group">
-                <label>Адрес доставки <span class="required">*</span></label>
+                <label>Откуда забирать</label>
+                <input type="text" id="fromInput" placeholder="Адрес нефтебазы, заправки...">
+            </div>
+            <div class="input-group">
+                <label>Куда доставить <span class="required">*</span></label>
                 <textarea id="addressInput" placeholder="Город, улица, дом, ориентиры..."></textarea>
             </div>
             <div class="input-group">
@@ -290,6 +282,7 @@
             }
 
             const volume = document.getElementById('volumeInput').value;
+            const from = document.getElementById('fromInput').value || '—';
             const address = document.getElementById('addressInput').value;
             const comment = document.getElementById('commentInput').value || '—';
             const name = document.getElementById('nameInput').value;
@@ -301,7 +294,8 @@
 🚛 <b>НОВАЯ ЗАЯВКА — БЕНЗОВОЗ</b>
 
 📦 <b>Объём:</b> ${volume} литров
-📍 <b>Адрес:</b> ${address}
+🏭 <b>Откуда:</b> ${from}
+📍 <b>Куда:</b> ${address}
 📝 <b>Комментарий:</b> ${comment}
 
 👤 <b>Заказчик:</b> ${name}
