@@ -177,7 +177,7 @@
             <div class="section-title">📦 Детали заказа</div>
             <div class="input-group">
                 <label>Объём топлива <span class="required">*</span> (литры)</label>
-                <input type="number" id="volumeInput" placeholder="Например: 500" min="100" max="30000" step="100">
+                <input type="number" id="volumeInput" placeholder="Например: 50000" min="1" step="100">
             </div>
             <div class="input-group">
                 <label>Адрес доставки <span class="required">*</span></label>
@@ -241,8 +241,9 @@
                 }
             });
 
+            // Объём — любое число больше 0
             const vol = parseInt(document.getElementById('volumeInput').value);
-            if (isNaN(vol) || vol < 100 || vol > 30000) {
+            if (isNaN(vol) || vol < 1) {
                 document.getElementById('volumeInput').classList.add('error-input');
                 valid = false;
             }
@@ -320,7 +321,7 @@
                 successBox.style.display = 'block';
                 successBox.scrollIntoView({ behavior: 'smooth' });
             } catch (error) {
-                alert('❌ Не удалось отправить заявку.\n\nПозвоните нам: +7 (912) 684-90-31');
+                alert('❌ Не удалось отправить заявку.\n\nПозвоните нам: +7 (912)-684-90-31');
                 console.error('Ошибка:', error);
             } finally {
                 btn.disabled = false;
