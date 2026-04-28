@@ -216,9 +216,9 @@
     </div>
 
     <script>
-        // ⚙️ НАСТРОЙКИ TELEGRAM — вставь свои данные сюда
-        const TELEGRAM_BOT_TOKEN = 'ВСТАВЬ_СВОЙ_ТОКЕН_СЮДА';
-        const TELEGRAM_CHAT_ID = 'ВСТАВЬ_СВОЙ_CHAT_ID_СЮДА';
+        // ⚙️ НАСТРОЙКИ TELEGRAM
+        const TELEGRAM_BOT_TOKEN = '8725933179:AAGUNR9Q6YLPytIqFynhHyensQUvGj-f5sg';
+        const TELEGRAM_CHAT_ID = '6483953073';
 
         function validateForm() {
             let valid = true;
@@ -257,13 +257,13 @@
         }
 
         async function sendToTelegram(text) {
-            const url = `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}=8725933179:AAGUNR9Q6YLPytIqFynhHyensQUvGj-f5sg`;
+            const url = `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`;
             
             const response = await fetch(url, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
-                    chat_id: TELEGRAM_CHAT_ID='6483953073';
+                    chat_id: TELEGRAM_CHAT_ID,
                     text: text,
                     parse_mode: 'HTML'
                 })
@@ -295,7 +295,7 @@
             const phone = document.getElementById('phoneInput').value;
             const timestamp = new Date().toLocaleString('ru-RU');
 
-            // Формируем красивое сообщение
+            // Формируем сообщение
             const message = `
 🚛 <b>НОВАЯ ЗАЯВКА — БЕНЗОВОЗ</b>
 
@@ -320,7 +320,7 @@
                 successBox.style.display = 'block';
                 successBox.scrollIntoView({ behavior: 'smooth' });
             } catch (error) {
-                alert('❌ Не удалось отправить заявку.\n\nПозвоните нам: +7 (900) 123-45-67');
+                alert('❌ Не удалось отправить заявку.\n\nПозвоните нам: +7 (912) 684-90-31');
                 console.error('Ошибка:', error);
             } finally {
                 btn.disabled = false;
